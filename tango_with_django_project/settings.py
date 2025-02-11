@@ -138,3 +138,5 @@ PASSWORD_HASHERS = [
 
 LOGIN_URL = 'rango:login'
 
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True
+SESSION_ENGINE = "django.contrib.sessions.backends.db"
