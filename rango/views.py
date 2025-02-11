@@ -22,9 +22,9 @@ def index(request):
     return render(request, 'rango/index.html', context=context_dict)
 
 def about(request):
-    context_dict = {'boldmessage': 'This tutorial has been put together by Chelsea!'}
-
-    return render(request, 'rango/about.html', context=context_dict)
+    print(request.method)
+    print(request.user)
+    return render(request, 'rango/about.html', {})
 
 def show_category(request, category_name_slug):
 
@@ -55,7 +55,7 @@ def add_category(request):
         if form.is_valid():
             form.save(commit=True)
 
-            return redirect('/rango/')
+            return redirect(reverse('rango:index'))
         else:
             print(form.errors)
     return render(request, 'rango/add_category.html', {'form': form})
@@ -67,7 +67,7 @@ def add_page(request, category_name_slug):
         category = Category.objects.get(slug=category_name_slug)
     except Category.DoesNotExist:
 
-        return redirect('rango:index')
+        return redirect(reverse('rango:index'))
 
     form = PageForm()
 
